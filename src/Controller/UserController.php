@@ -21,6 +21,7 @@ class UserController extends AppController{
     public function add()
     {
         $user = $this->Tabledata->newEmptyEntity();
+        
         if ($this->request->is('post')) {
             $user = $this->Tabledata->patchEntity($user, $this->request->getData());
             if ($this->TabledataTable->save($user)) {
