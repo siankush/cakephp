@@ -27,7 +27,7 @@
                     echo $this->Form->control('phone');
                     echo $this->Form->control('gender');
                     echo $this->Form->control('password');
-                    echo $this->Form->control('imgfile',['type'=>'file']);
+                    echo $this->Form->control('image',['type'=>'file']);
                     echo $this->Html->image($tableinfo->image);
                 ?>
             </fieldset>
