@@ -23,7 +23,7 @@
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Html->link(__('forget password'),['controller'=>'Tableinfo', 'action'=>'pasmail']) ?>
+            <?= $this->Html->link(__('forget password'),['controller'=>'Tableinfo', 'action'=>'forgtpass']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

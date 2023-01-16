@@ -17,12 +17,12 @@
             <fieldset>
                 <legend><?= __('Add Tableinfo') ?></legend>
                 <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('phone');
-                    echo $this->Form->control('gender');
+                    echo $this->Form->control('name',['required'=>false]);
+                    echo $this->Form->control('email',['required'=>false]);
+                    echo $this->Form->control('phone',['required'=>false]);
+                    echo $this->Form->control('gender',['required'=>false]);
                     echo $this->Form->control('password',['required' => false]);
-                    echo $this->Form->control('image_file',['type'=>'file']);
+                    echo $this->Form->control('image_file',['type'=>'file' ,'required' => false]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

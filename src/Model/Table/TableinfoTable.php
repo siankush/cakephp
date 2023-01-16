@@ -55,21 +55,21 @@ class TableinfoTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
-            ->allowEmptyString('name');
+            ->notEmptyString('name', 'please enter name');
 
         $validator
             ->email('email')
-            ->allowEmptyString('email');
+            ->notEmptyString('email', 'please enter email');
 
         $validator
             ->scalar('phone')
             ->maxLength('phone', 200)
-            ->allowEmptyString('phone');
+            ->notEmptyString('phone', 'please enter phone');
 
         $validator
             ->scalar('gender')
             ->maxLength('gender', 255)
-            ->allowEmptyString('gender');
+            ->notEmptyString('gender', 'please enter name');
 
         $validator
             ->scalar('password')
@@ -94,6 +94,10 @@ class TableinfoTable extends Table
         //        'message' => 'please enter special character',
         //          ]
         //     ]);
+        $validator
+            ->scalar('image')
+            ->maxLength('image', 255)
+            ->notEmptyFile('image_file','please select file');
 
         return $validator;
     }

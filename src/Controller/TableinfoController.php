@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\ORM\TableRegistry;
 use Cake\Mailer\Email;
 use Cake\Mailer\Mailer;
 use Cake\Mailer\TransportFactory;
-use Cake\View\View;
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Utility\Security;
+use Cake\ORM\TableRegistry;
 
 
 
@@ -27,11 +28,11 @@ class TableinfoController extends AppController
      */
     public function index()
     {
-        // $session = $this->request->getSession();
-        // if ($session->read('email') != null) {
-        // } else {
-        //     $this->redirect(['action' => 'login']);
-        // }
+        $session = $this->request->getSession();
+        if ($session->read('email') != null) {
+        } else {
+            $this->redirect(['action' => 'login']);
+        }
 
         $tableinfo = $this->paginate($this->Tableinfo);
 
@@ -47,11 +48,11 @@ class TableinfoController extends AppController
      */
     public function view($id = null)
     {
-        // $session = $this->request->getSession();
-        // if ($session->read('email') != null) {
-        // } else {
-        //     $this->redirect(['action' => 'login']);
-        // }
+        $session = $this->request->getSession();
+        if ($session->read('email') != null) {
+        } else {
+            $this->redirect(['action' => 'login']);
+        }
         $tableinfo = $this->Tableinfo->get($id, [
             'contain' => [],
         ]);
@@ -81,12 +82,12 @@ class TableinfoController extends AppController
             $image->moveTo($targetPath);
 
             $tableinfo->image=$name;
-            print_r($tableinfo);
+
 
             if ($this->Tableinfo->save($tableinfo)) {
                 $this->Flash->success(__('The tableinfo has been saved.'));
 
-                return $this->redirect(['action' => 'login']);
+                return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The tableinfo could not be saved. Please, try again.'));
         }
@@ -102,11 +103,11 @@ class TableinfoController extends AppController
      */
     public function edit($id = null)
     {
-        // $session = $this->request->getSession();
-        // if ($session->read('email') != null) {
-        // } else {
-        //     $this->redirect(['action' => 'login']);
-        // }
+        $session = $this->request->getSession();
+        if ($session->read('email') != null) {
+        } else {
+            $this->redirect(['action' => 'login']);
+        }
 
             
 
@@ -184,7 +185,10 @@ class TableinfoController extends AppController
 
              $email=$this->request->getData('email');
              $password=$this->request->getData('password');
-            
+             
+            //  $hashpassword = new DefaultPasswordHasher();
+            //  $hashpassword->hash($password);
+            //  echo $hashpassword;die;
 
              $result = $this->Tableinfo->login($email, $password);
          
@@ -200,15 +204,55 @@ class TableinfoController extends AppController
            
     }
 
-    public function forgtpass(){
-    
+     public function forgtpass()
+    {
+if ($this->request->is('post')) {
+		$email = $this->request->getData('email');
+		$token = Security::hash(Security::randomBytes(25));
+		
+		$TableinfoTable = TableRegistry::get('Tableinfo');
 
-     }
+			if ($email == NULL) {
+				$this->Flash->error(__('Please insert your email address')); 
+			} 
+			if	($tableinfo = $TableinfoTable->find('all')->where(['email'=>$email])->first()) { 
+				$tableinfo->token = $token;
+				if ($TableinfoTable->save($tableinfo)){
+					$mailer = new Mailer('default');
+					$mailer->setTransport('gmail');
+					$mailer->setFrom(['ankush14042000@gmail.com' => 'ankush'])
+					->setTo($email)
+					->setEmailFormat('html')
+					->setSubject('Forgot Password Request')
+					->deliver('Hello<br/>Please click link below to reset your password<br/><br/>
+                    <a href="http://localhost:8765/tableinfo/resetpassword/'.$token.'">Reset Password</a>');
+				}
+				$this->Flash->success('Reset password link has been sent to your email ('.$email.'), please check your email');
+			}
+			if	($total = $TableinfoTable->find('all')->where(['email'=>$email])->count()==0) {
+				$this->Flash->error(__('Email is not registered in system'));
+			}
+	}
+}
 
-    public function pasmail(){
-         
-    }
+public function resetpassword($token)
+{
+	if($this->request->is('post')){
 
+		$newPass = $this->request->getData('password');
+
+		$TableinfoTable = TableRegistry::get('Tableinfo');
+
+		$tableinfo = $TableinfoTable->find('all')->where(['token'=>$token])->first();
+		$tableinfo->password = $newPass;
+		$tableinfo->token = 'null';
+
+		if ($TableinfoTable->save($tableinfo)) {
+			$this->Flash->success('Password successfully reset. Please login using your new password');
+			return $this->redirect(['action'=>'login']);
+		}
+	}
+}
     public function logout() {
         $session = $this->request->getSession();
         $session->destroy();

@@ -15,16 +15,12 @@
         <div class="tableinfo form content">
             <?= $this->Form->create() ?>
             <fieldset>
-                <legend><?= __('Edit Tableinfo') ?></legend>
+                <legend><?= __('forget password') ?></legend>
                 <?php
-
-                    echo $this->Form->control('password');
-                    echo $this->Form->control('cpassword');
+                    echo $this->Form->control('email');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('update')) ?>
-
-            <?= $this->Html->link(__('if have an account? login'),['controller' => 'Tableinfo', 'action' => 'login']) ?>
+            <?= $this->Form->button(__('submit')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
