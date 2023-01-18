@@ -7,11 +7,11 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\TableRegistry;
 
 /**
  * Tableinfo Model
+ *
+ * @property \App\Model\Table\ContactinfosTable&\Cake\ORM\Association\HasMany $Contactinfos
  *
  * @method \App\Model\Entity\Tableinfo newEmptyEntity()
  * @method \App\Model\Entity\Tableinfo newEntity(array $data, array $options = [])
@@ -42,6 +42,9 @@ class TableinfoTable extends Table
         $this->setTable('tableinfo');
         $this->setDisplayField('name');
         $this->setPrimaryKey('Id');
+
+
+        // $this->hasOne('Commentinfo');
     }
 
     /**
@@ -55,61 +58,39 @@ class TableinfoTable extends Table
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
-            ->notEmptyString('name', 'please enter name');
+            ->allowEmptyString('name');
 
         $validator
             ->email('email')
-            ->notEmptyString('email', 'please enter email');
+            ->allowEmptyString('email');
 
         $validator
             ->scalar('phone')
             ->maxLength('phone', 200)
-            ->notEmptyString('phone', 'please enter phone');
+            ->allowEmptyString('phone');
 
         $validator
             ->scalar('gender')
             ->maxLength('gender', 255)
-            ->notEmptyString('gender', 'please enter name');
+            ->allowEmptyString('gender');
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 10)
+            ->maxLength('password', 255)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password', 'please enter password');
-        //     ->add('password', [
-        //         'lower'=>[
-        //         'rule' => array('custom','/[a-z]/'),
-        //         'message' => 'please enter lowercase',
-        //         ],
-        //     'upper'=>[
-        //        'rule' => array('custom','/[A-Z]/'),
-        //        'message' => 'please enter uppercase',
-        //           ],
-        //     'number'=>[
-        //        'rule' => array('custom','/[0-9]/'),
-        //        'message' => 'please enter number',
-        //           ],
-        //    'character'=>[
-        //        'rule' => array('custom','/[#?!@$%^&*-]/'),
-        //        'message' => 'please enter special character',
-        //          ]
-        //     ]);
+            ->notEmptyString('password');
+
         $validator
             ->scalar('image')
             ->maxLength('image', 255)
-            ->notEmptyFile('image_file','please select file');
+            ->requirePresence('image', 'create')
+            ->notEmptyFile('image');
+
+        $validator
+            ->scalar('token')
+            ->maxLength('token', 255)
+            ->allowEmptyString('token');
 
         return $validator;
     }
-
-    public function login($email, $password)
-    {
-        $result = $this->find('all')->where(['email' => $email, 'password' => $password])->first();
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

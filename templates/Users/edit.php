@@ -23,13 +23,9 @@
                 <legend><?= __('Edit User') ?></legend>
                 <?php
                     echo $this->Form->control('name');
-                    echo $this->Form->control('last_name');
                     echo $this->Form->control('email');
-                    echo $this->Form->control('phone_number');
                     echo $this->Form->control('password');
                     echo $this->Form->control('created_date');
-                    echo $this->Form->control('modified_date');
-                    echo $this->Form->control('token');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

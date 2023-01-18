@@ -23,16 +23,8 @@
                     <td><?= h($user->name) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Last Name') ?></th>
-                    <td><?= h($user->last_name) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Email') ?></th>
                     <td><?= h($user->email) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Phone Number') ?></th>
-                    <td><?= h($user->phone_number) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>
@@ -42,11 +34,36 @@
                     <th><?= __('Created Date') ?></th>
                     <td><?= h($user->created_date) ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Modified Date') ?></th>
-                    <td><?= h($user->modified_date) ?></td>
-                </tr>
             </table>
+            <div class="related">
+                <h4><?= __('Related Comment') ?></h4>
+                <?php if (!empty($post->comment)) : ?>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th><?= __('Id') ?></th>
+                            <th><?= __('Post Id') ?></th>
+                            <th><?= __('Comment') ?></th>
+                            <th><?= __('Created Date') ?></th>
+                            <th class="actions"><?= __('Actions') ?></th>
+                        </tr>
+                        <?php foreach ($post->comment as $comment) : ?>
+                        <tr>
+                            <td><?= h($comment->id) ?></td>
+                            <td><?= h($comment->post_id) ?></td>
+                            <td><?= h($comment->comment) ?></td>
+                            <td><?= h($comment->created_date) ?></td>
+                            <td class="actions">
+                                <?= $this->Html->link(__('View'), ['controller' => 'Comment', 'action' => 'view', $comment->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['controller' => 'Comment', 'action' => 'edit', $comment->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comment', 'action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id)]) ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </div>

@@ -52,72 +52,29 @@ class UsersTable extends Table
     {
         $validator
             ->scalar('name')
-            ->maxLength('name', 10)
-            ->minLength('name', 3,"atleast 3 character")
+            ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmptyString('name','please enter name')
-            ->add('name', ['name'=>[
-                        'rule' => array('custom','/^[A-Za-z_]*$/'),
-                        'message' => 'please enter character',
-            ]
-                    ]);
-        $validator
-            ->scalar('last_name')
-            ->maxLength('last_name', 255)
-            ->requirePresence('last_name', 'create')
-            ->notEmptyString('last_name','please enter last name');
+            ->notEmptyString('name');
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email','please enter email')
-            ->add('email', 'unique', [
-                'rule' => 'validateUnique', 'provider' => 'table',
-                'message' => 'Email already exist'
-            ]);
-
-        $validator
-            ->scalar('phone_number')
-            ->integer('phone_number','phone number should numeric')
-            ->maxLength('phone_number', 10)
-            ->minLength('phone_number', 10,'please enter 10 digit')
-            ->requirePresence('phone_number', 'create')
-            ->notEmptyString('phone_number','please enter phone');
-
+            ->notEmptyString('email')
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('password')
-            ->minLength('password', 6, 'please enter atleast 6 digit')
+            ->maxLength('password', 255)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password','please enter password');
-
-        $validator
-            ->scalar('gender')
-            ->maxLength('gender', 200)
-            ->notEmptyString('gender','please select gender');
+            ->notEmptyString('password');
 
         $validator
             ->dateTime('created_date')
+            ->requirePresence('created_date', 'create')
             ->notEmptyDateTime('created_date');
-
-        $validator
-            ->dateTime('modified_date')
-            ->notEmptyDateTime('modified_date');
-
-        $validator
-            ->scalar('token')
-            ->maxLength('token', 255)
-            ->allowEmptyString('token');
-        $validator
-            ->scalar('file')
-            ->maxLength('file', 255)
-            ->allowEmptyString('file','upload');
 
         return $validator;
     }
-
-
-  
 
     /**
      * Returns a rules checker object that will be used for validating

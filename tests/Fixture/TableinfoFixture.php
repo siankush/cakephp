@@ -31,6 +31,8 @@ class TableinfoFixture extends TestFixture
                 'phone' => 'Lorem ipsum dolor sit amet',
                 'gender' => 'Lorem ipsum dolor sit amet',
                 'password' => 'Lorem ipsum dolor sit amet',
+                'image' => 'Lorem ipsum dolor sit amet',
+                'token' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

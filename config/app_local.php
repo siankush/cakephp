@@ -47,7 +47,7 @@ return [
             'username' => 'root',
             'password' => 'password',
 
-            'database' => 'test',
+            'database' => 'task',
             /*
              * If not using the default 'public' schema with the PostgreSQL driver
              * set it here.

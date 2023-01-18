@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
-use Cake\Auth\DefaultPasswordHasher;
-
 use Cake\ORM\Entity;
 
 /**
@@ -16,6 +14,10 @@ use Cake\ORM\Entity;
  * @property string|null $phone
  * @property string|null $gender
  * @property string $password
+ * @property string $image
+ * @property string|null $token
+ *
+ * @property \App\Model\Entity\Contactinfo $contactinfo
  */
 class Tableinfo extends Entity
 {
@@ -36,6 +38,7 @@ class Tableinfo extends Entity
         'password' => true,
         'image' => true,
         'token' => true,
+        'commentinfo' => true,
     ];
 
     /**
@@ -45,11 +48,6 @@ class Tableinfo extends Entity
      */
     protected $_hidden = [
         'password',
+        'token',
     ];
-    // protected function _setPassword($password)
-    // {
-    //     if (strlen($password) > 0) {
-    //         return (new DefaultPasswordHasher)->hash($password);
-    //     }
-    // }
 }

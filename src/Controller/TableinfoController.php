@@ -67,6 +67,8 @@ class TableinfoController extends AppController
      */
     public function add()
     {
+        // echo $this->Commn->test(520,23);
+        // die;
         $tableinfo = $this->Tableinfo->newEmptyEntity();
         if ($this->request->is('post')) {
             $tableinfo = $this->Tableinfo->patchEntity($tableinfo, $this->request->getData());
