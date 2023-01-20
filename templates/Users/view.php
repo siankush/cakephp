@@ -35,35 +35,33 @@
                     <td><?= h($user->created_date) ?></td>
                 </tr>
             </table>
-            <div class="related">
-                <h4><?= __('Related Comment') ?></h4>
-                <?php if (!empty($post->comment)) : ?>
-                <div class="table-responsive">
-                    <table>
+            <h3><?= h("Your Post's..") ?></h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th><?= $this->Paginator->sort('id') ?></th>
+                        <th><?= $this->Paginator->sort('title') ?></th>
+                        <th><?= $this->Paginator->sort('body') ?></th>
+                        <th><?= $this->Paginator->sort('created_at') ?></th>
+                        <th class="actions"><?= __('Actions') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($user->post as $post) : ?>
                         <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Post Id') ?></th>
-                            <th><?= __('Comment') ?></th>
-                            <th><?= __('Created Date') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        <?php foreach ($post->comment as $comment) : ?>
-                        <tr>
-                            <td><?= h($comment->id) ?></td>
-                            <td><?= h($comment->post_id) ?></td>
-                            <td><?= h($comment->comment) ?></td>
-                            <td><?= h($comment->created_date) ?></td>
+                            <td><?= h($post->id) ?></td>
+                            <td><?= h($post->title) ?></td>
+                            <td><?= h($post->body) ?></td>
+                            <td><?= h($post->created_at) ?></td>
                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Comment', 'action' => 'view', $comment->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Comment', 'action' => 'edit', $comment->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comment', 'action' => 'delete', $comment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comment->id)]) ?>
+                                <?= $this->Html->link(__('View'), ['action' => 'postview', $post->id, $user->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'postedit', $post->id, $user->id]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['action' => 'postdelete', $post->id, $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]) ?>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

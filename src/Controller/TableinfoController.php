@@ -26,13 +26,14 @@ class TableinfoController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
+
     public function index()
     {
-        $session = $this->request->getSession();
-        if ($session->read('email') != null) {
-        } else {
-            $this->redirect(['action' => 'login']);
-        }
+        // $session = $this->request->getSession();
+        // if ($session->read('email') != null) {
+        // } else {
+        //     $this->redirect(['action' => 'login']);
+        // }
 
         $tableinfo = $this->paginate($this->Tableinfo);
 
@@ -48,11 +49,11 @@ class TableinfoController extends AppController
      */
     public function view($id = null)
     {
-        $session = $this->request->getSession();
-        if ($session->read('email') != null) {
-        } else {
-            $this->redirect(['action' => 'login']);
-        }
+        // $session = $this->request->getSession();
+        // if ($session->read('email') != null) {
+        // } else {
+        //     $this->redirect(['action' => 'login']);
+        // }
         $tableinfo = $this->Tableinfo->get($id, [
             'contain' => [],
         ]);
@@ -85,7 +86,7 @@ class TableinfoController extends AppController
 
             $tableinfo->image=$name;
 
-
+            echo $name;
             if ($this->Tableinfo->save($tableinfo)) {
                 $this->Flash->success(__('The tableinfo has been saved.'));
 
@@ -105,11 +106,11 @@ class TableinfoController extends AppController
      */
     public function edit($id = null)
     {
-        $session = $this->request->getSession();
-        if ($session->read('email') != null) {
-        } else {
-            $this->redirect(['action' => 'login']);
-        }
+        // $session = $this->request->getSession();
+        // if ($session->read('email') != null) {
+        // } else {
+        //     $this->redirect(['action' => 'login']);
+        // }
 
             
 
@@ -183,17 +184,15 @@ class TableinfoController extends AppController
     public function login(){
       
         if ($this->request->is('post')) {
-            // $tableinfo = $this->Tableinfo->patchEntity($tableinfo, $this->request->getData());
+
 
              $email=$this->request->getData('email');
              $password=$this->request->getData('password');
-             
-            //  $hashpassword = new DefaultPasswordHasher();
-            //  $hashpassword->hash($password);
-            //  echo $hashpassword;die;
+        
 
              $result = $this->Tableinfo->login($email, $password);
-         
+        
+
              if ($result) {
                  $session = $this->getRequest()->getSession();
                  $session->write('email', $email);

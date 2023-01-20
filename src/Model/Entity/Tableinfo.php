@@ -38,7 +38,6 @@ class Tableinfo extends Entity
         'password' => true,
         'image' => true,
         'token' => true,
-        'commentinfo' => true,
     ];
 
     /**

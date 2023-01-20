@@ -6,14 +6,16 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * CustmrTable Entity
+ * Custmr Entity
  *
  * @property int $id
  * @property string $name
  * @property string $email
  * @property string $phone
+ *
+ * @property \App\Model\Entity\Profile[] $profile
  */
-class CustmrTable extends Entity
+class Custmr extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -28,5 +30,6 @@ class CustmrTable extends Entity
         'name' => true,
         'email' => true,
         'phone' => true,
+        'profile' => true,
     ];
 }

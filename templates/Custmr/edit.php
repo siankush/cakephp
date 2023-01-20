@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\CustmrTable $custmrTable
+ * @var \App\Model\Entity\Custmr $custmr
  */
 ?>
 <div class="row">
@@ -10,17 +10,17 @@
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $custmrTable->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $custmrTable->id), 'class' => 'side-nav-item']
+                ['action' => 'delete', $custmr->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $custmr->id), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('List Custmr Tables'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Custmr'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="custmrTables form content">
-            <?= $this->Form->create($custmrTable) ?>
+        <div class="custmr form content">
+            <?= $this->Form->create($custmr) ?>
             <fieldset>
-                <legend><?= __('Edit Custmr Table') ?></legend>
+                <legend><?= __('Edit Custmr') ?></legend>
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('email');

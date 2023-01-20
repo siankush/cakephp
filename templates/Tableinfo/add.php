@@ -22,7 +22,6 @@
                     echo $this->Form->control('phone',['required'=>false]);
                     echo $this->Form->control('gender',['required'=>false]);
                     echo $this->Form->control('password',['required' => false]);
-                    echo $this->Form->control('commentinfo.address',['required' => true]);
                     echo $this->Form->control('image_file',['type'=>'file' ,'required' => false]);
                 ?>
             </fieldset>

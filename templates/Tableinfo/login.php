@@ -17,7 +17,7 @@
             <?= $this->Form->create() ?>
             <fieldset>
                 <legend><?= __('login info') ?></legend>
-                <?php
+                <?php 
                     echo $this->Form->control('email');
                     echo $this->Form->control('password');
                 ?>

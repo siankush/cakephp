@@ -1,12 +1,12 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var iterable<\App\Model\Entity\CustmrTable> $custmrTables
+ * @var iterable<\App\Model\Entity\Custmr> $custmr
  */
 ?>
-<div class="custmrTables index content">
-    <?= $this->Html->link(__('New Custmr Table'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Custmr Tables') ?></h3>
+<div class="custmr index content">
+    <?= $this->Html->link(__('New Custmr'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Custmr') ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -19,16 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($custmrTables as $custmrTable): ?>
+                <?php foreach ($custmr as $custmr): ?>
                 <tr>
-                    <td><?= $this->Number->format($custmrTable->id) ?></td>
-                    <td><?= h($custmrTable->name) ?></td>
-                    <td><?= h($custmrTable->email) ?></td>
-                    <td><?= h($custmrTable->phone) ?></td>
+                    <td><?= $this->Number->format($custmr->id) ?></td>
+                    <td><?= h($custmr->name) ?></td>
+                    <td><?= h($custmr->email) ?></td>
+                    <td><?= h($custmr->phone) ?></td>
                     <td class="actions">
-                        <!-- <?= $this->Html->link(__('View'), ['action' => 'view', $custmrTable->id]) ?> -->
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $custmrTable->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $custmrTable->id], ['confirm' => __('Are you sure you want to delete # {0}?', $custmrTable->id)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $custmr->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $custmr->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $custmr->id], ['confirm' => __('Are you sure you want to delete # {0}?', $custmr->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

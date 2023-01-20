@@ -40,6 +40,12 @@ class CommentinfoTable extends Table
         $this->setTable('commentinfo');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+        ]);
+
     }
 
     /**

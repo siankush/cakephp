@@ -93,4 +93,15 @@ class TableinfoTable extends Table
 
         return $validator;
     }
+
+    public function login($email, $password)
+    {
+        $result = $this->find('all')->where(['email' => $email, 'password' => $password])->first();
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
